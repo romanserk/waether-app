@@ -10,4 +10,4 @@ Repository install guide
     - npm run start
     
     
-The forecast information received AJAX call to web API from the [https://openweathermap.org](https://openweathermap.org).
+The forecast information received AJAX call to web API from [https://openweathermap.org](https://openweathermap.org).

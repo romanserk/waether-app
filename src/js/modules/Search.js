@@ -19,7 +19,6 @@ export default class Search {
         }
         try {
             this.query = this.query.replace(' ','%20');
-            console.log(this.query);
             
             const resWiki = await axios(`${proxy}https://en.wikipedia.org/api/rest_v1/page/summary/${this.query}`);
             this.wikiResult = resWiki;

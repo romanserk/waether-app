@@ -13,7 +13,6 @@ export const clearInput = () => {
 };
 
 export const showTodaysWeather = forecast => {
-    //console.log(forecast);
 
     elements.todayWeather.innerHTML = `
         <div class="forecast-header">

@@ -3,7 +3,7 @@ export const elements = {
     searchInput: document.querySelector('.search__field'),
     todayWeather: document.querySelector('.today'), 
     nextDaysWeather: document.querySelectorAll('.days'),
-    
+    wikiContainer: document.querySelector('.wiki'),
 };
 
 

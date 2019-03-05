@@ -3,7 +3,7 @@ html {
   color: #000;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 html,
@@ -16,7 +16,7 @@ textarea {
 
 body {
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 
@@ -217,7 +217,6 @@ form input[type="reset"] {
 
 .forecast-container {
   width: 100%;
-  background: #323544;
   display: table;
   table-layout: fixed;
   width: 100%;
@@ -226,6 +225,20 @@ form input[type="reset"] {
   margin-top: -150px;
   margin-bottom: 50px;
 }
+
+
+.wiki {
+  display: flex;
+  background: #1e202b;
+  height: 260px;
+  padding: 30px;
+}
+
+.wiki img{
+  max-height: 200px;
+  margin-left: 50px;
+}
+
 
 .forecast-container .forecast {
   display: table-cell;
@@ -347,3 +360,4 @@ form input[type="reset"] {
   transform: translate(-50%, -50%);
   font-size: 5rem;
 }
+

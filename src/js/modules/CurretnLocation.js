@@ -9,7 +9,7 @@ export default class Location {
        
         try {
             const res = await axios(`http://ip-api.com/json`);
-            this.city = res.data.city;
+            this.cityName = res.data.city;
         } catch (error) {
             alert(error);
         }

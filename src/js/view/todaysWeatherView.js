@@ -1,5 +1,8 @@
 import {
-    elements, generateDate, calculateTempMax, generateIcon
+    elements,
+    generateDate,
+    calculateTempMax,
+    generateIcon
 } from './base';
 
 
@@ -10,7 +13,7 @@ export const clearInput = () => {
 };
 
 export const showTodaysWeather = forecast => {
-    console.log(forecast);
+    //console.log(forecast);
 
     elements.todayWeather.innerHTML = `
         <div class="forecast-header">
@@ -25,7 +28,7 @@ export const showTodaysWeather = forecast => {
                     <img src="images/icons/icon-${generateIcon(todayListNum(forecast))}.svg" alt="" width=90>
                 </div>	
             </div>
-            <span><img src="images/icon-umberella.png" alt="">${todayRain(todayListNum(forecast))}mm</span>
+            <span><img src="images/icon-umberella.png" alt="">${todayRain(forecast)}mm</span>
             <span><img src="images/icon-wind.png" alt="">${calculateTodaysWind(forecast).speed}km/h</span>
             <span><img src="images/icon-compass.png" alt="">${calculateTodaysWind(forecast).dir}</span>
         </div>
@@ -34,19 +37,40 @@ export const showTodaysWeather = forecast => {
 
 
 
-const todayRain = forecast => forecast.rain['3h'] ? forecast.rain['3h'] : '0';
+const todayRain = forecast => {
+
+    var rainmm = 0;
+    var hours = 0;
+    forecast.list.forEach(function (item) {
+        if (item.dt_txt.split(' ')[0] === forecast.list[0].dt_txt.split(' ')[0]) {
+            if (item.rain && item.rain['3h']) {
+                rainmm += item.rain['3h'];
+                hours++;
+            } else if (item.snow && item.snow['3h']) {
+                rainmm += item.snow['3h'];
+                hours++;
+            }
+        }
+    });
+
+    return Math.round(rainmm / (hours === 0 ? 1 : hours));
+
+};
 
 const todayListNum = forecast => forecast.list[Math.round((forecast.list.length - 32) / 2)];
 
 const calculateTodaysWind = forecast => {
-    var wind = forecast.list[0].wind;
+    var windSpeed = 0;
+    for (var i = 0; i < 6; i++){
+        windSpeed += forecast.list[i].wind.speed;
+    }
     var dirArr = ['North', 'East', 'South', 'West'];
+    var direction = dirArr[Math.round(forecast.list[0].wind.deg / 90)];
 
     return {
-        speed: Math.round(wind.speed),
-        dir: dirArr[Math.round(wind.deg / 90)]
+        speed: Math.round(windSpeed / 6),
+        dir: direction ? direction : dirArr[3]
     }
 
 };
-
 

@@ -18,17 +18,17 @@ export default class Search {
             alert(error + ` Cant find such location as ${this.query}`);
         }
         try {
-            this.query = this.query.replace(' ','%20');
-            
+            this.query = this.query.replace(' ', '%20');
+
             const resWiki = await axios(`${proxy}https://en.wikipedia.org/api/rest_v1/page/summary/${this.query}`);
             this.wikiResult = resWiki;
 
         } catch (error) {
             alert(error);
         }
-        
+
     };
-    
+
+  
 
 }
-

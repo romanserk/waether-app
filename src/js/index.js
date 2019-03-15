@@ -1,11 +1,14 @@
 import Search from './modules/Search'
 import Location from './modules/CurretnLocation'
+import Weather from './modules/Weather'
 import * as todaysWeather from './view/todaysWeatherView';
-import * as NextDaysWeather from './view/nextDaysWeatherView';
+import * as nextDaysWeatherView from './view/nextDaysWeatherView';
 import {
     elements,
     loader,
-    clearLoader
+    clearLoader,
+    getInput,
+    clearInput
 } from './view/base';
 import {
     updateWikiRes
@@ -17,7 +20,7 @@ const controlSearch = async (query) => {
 
     // 1. get query from view
     if (!query) {
-        query = todaysWeather.getInput();
+        query = getInput();
     }
     loader();
     if (query) {
@@ -25,16 +28,18 @@ const controlSearch = async (query) => {
         state.search = new Search(query);
 
         // 3. preapere UI for results
-        todaysWeather.clearInput();
+        clearInput();
 
         // 4. search     
         await state.search.getResults();
 
         if (state.search.weatherResult) {
-            // 5. render results on UI
-            todaysWeather.showTodaysWeather(state.search.weatherResult);
-            NextDaysWeather.showNextDaysWeatherWeather(state.search.weatherResult);
+            // 5. render results
+            controlWeather(state.search.weatherResult);
             updateWikiRes(state.search.wikiResult);
+            // add results to UI
+            todaysWeather.showTodaysWeather(state.weather.daysWeather[0]);
+            nextDaysWeatherView.showNextDaysWeather(state.weather.daysWeather);
         }
 
     }
@@ -42,15 +47,20 @@ const controlSearch = async (query) => {
 
 }
 
+const controlWeather = (forecast) => {
+
+    state.weather = new Weather();    
+    state.weather.setWeather(forecast);
+};
+
+
 elements.searchBtn.addEventListener('click', e => {
     e.preventDefault();
     controlSearch();
 });
 
-const onLoad = async () => {
+window.addEventListener('load', async () =>{
     state.city = new Location();
     await state.city.getResults();
     controlSearch(state.city.cityName);
-}
-
-onLoad();
+});

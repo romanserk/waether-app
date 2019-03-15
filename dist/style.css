@@ -232,6 +232,7 @@ form input[type="reset"] {
   background: #1e202b;
   height: 260px;
   padding: 30px;
+  font-size: 1.3rem;
 }
 
 .wiki img{

@@ -39,6 +39,7 @@ const controlSearch = async (query) => {
             updateWikiRes(state.search.wikiResult);
             // add results to UI
             todaysWeather.showTodaysWeather(state.weather.daysWeather[0]);
+            state.weather.daysWeather.splice(0,1);
             nextDaysWeatherView.showNextDaysWeather(state.weather.daysWeather);
         }
 
@@ -49,8 +50,18 @@ const controlSearch = async (query) => {
 
 const controlWeather = (forecast) => {
 
-    state.weather = new Weather();    
+    state.weather = new Weather();  
     state.weather.setWeather(forecast);
+    for (var i = 0; i < 5; i++){ 
+        state.weather.generateDate(forecast, i);
+        let date = state.weather.daysWeather[i].date;
+        state.weather.calculateTempMax(forecast.list, date, i);
+        state.weather.calculateTempMin(forecast.list, date, i);
+        state.weather.generateIcon(forecast, i);
+        state.weather.rain(forecast, i);
+        state.weather.calcWind(forecast, i);
+    }  
+    
 };
 
 

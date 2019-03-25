@@ -45,7 +45,7 @@ const controlSearch = async (query) => {
 
     }
     clearLoader();
-
+ 
 }
 
 const controlWeather = (forecast) => {

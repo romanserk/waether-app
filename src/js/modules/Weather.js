@@ -62,7 +62,6 @@ export default class Weather {
 
         weather.forEach(function (item) {
             let currDate = item.dt_txt.split(' ')[0];
-            console.log(currDate, date.dateNumb2);
             if ((currDate === date.dateNumb1 || currDate === date.dateNumb2) && item.main.temp_max > tempMax) {
                 tempMax = item.main.temp_max;
             }

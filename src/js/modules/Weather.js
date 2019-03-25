@@ -6,7 +6,7 @@ export default class Weather {
     setWeather(weather) {
 
         var city = weather.city.name;
-        
+
         for (var i = 0; i < 5; i++) {
             var singleDay = {
                 city,
@@ -16,8 +16,23 @@ export default class Weather {
     };
 
     generateDate(forecast, dayNum) {
+        // var date = new Date();
+        // date.setDate(date.getDate() + dayNum);
+
         var date = new Date();
         date.setDate(date.getDate() + dayNum);
+        var dd = date.getDate();
+        var mm = date.getMonth() + 1; //January is 0!
+        var yyyy = date.getFullYear();
+        if (dd < 10) {
+          dd = '0' + dd;
+        }
+        if (mm < 10) {
+          mm = '0' + mm;
+        }
+        var dateNumb1 =  yyyy + '-' + mm + '-' + dd;
+        var dateNumb2 =  yyyy + '-' + dd + '-' + mm;
+
         var optionsSt = {
             weekday: 'long',
             month: 'long',
@@ -28,13 +43,9 @@ export default class Weather {
             month: 'numeric',
             year: 'numeric'
         }
-    
+
         var dateString = date.toLocaleDateString(forecast.city.country, optionsSt).split(', ');
-        var dateNum = date.toLocaleDateString(forecast.city.country, optionsNu).split('/');
-        // date format: YYYY-MM-DD 
-        var dateNumb1 = `${dateNum[2]}-${dateNum[0] > 10 ? dateNum[0] : '0' + dateNum[0]}-${dateNum[1]}`;
-        // date format: YYYY-DD-MM 
-        var dateNumb2 = `${dateNum[2]}-${dateNum[1]}-${dateNum[0] > 10 ? dateNum[0] : '0' + dateNum[0]}`;
+
         this.daysWeather[dayNum].date =  {
             day: dateString[0],
             month: dateString[1],
@@ -42,14 +53,16 @@ export default class Weather {
             dateNumb2
         }
         this.daysWeather[dayNum].city = forecast.city.name;
-       
+
 
     };
 
     calculateTempMax(weather, date, dayNum){
         var tempMax = -99;
+
         weather.forEach(function (item) {
             let currDate = item.dt_txt.split(' ')[0];
+            console.log(currDate, date.dateNumb2);
             if ((currDate === date.dateNumb1 || currDate === date.dateNumb2) && item.main.temp_max > tempMax) {
                 tempMax = item.main.temp_max;
             }
@@ -67,7 +80,7 @@ export default class Weather {
         });
         this.daysWeather[dayNum].tempMin = Math.round(tempMin);
     };
-    
+
     generateIcon(forecast, index) {
         this.daysWeather[index].icon =  forecast.list[index].weather[0].icon.split(forecast.list[index].weather[0].icon.includes('n') ? 'n' : 'd')[0];
     };
@@ -77,7 +90,7 @@ export default class Weather {
         let rainmm = 0;
         let hours = 0;
         for (let i = index; i < index + 8; i++) {
-    
+
             if (forecast.list[i].rain && forecast.list[i].rain['3h']) {
                 rainmm += forecast.list[i].rain['3h'];
                 hours++;
@@ -96,12 +109,12 @@ export default class Weather {
         }
         var dirArr = ['North', 'East', 'South', 'West'];
         var direction = dirArr[Math.round(forecast.list[index + 4].wind.deg / 90)];
-    
+
         this.daysWeather[index].wind = {
             speed: Math.round(windSpeed / 6),
             dir: direction ? direction : dirArr[3]
         }
-    
+
     };
-    
+
 }

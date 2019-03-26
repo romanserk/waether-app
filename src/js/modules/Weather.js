@@ -38,13 +38,8 @@ export default class Weather {
             month: 'long',
             day: 'numeric'
         };
-        var optionsNu = {
-            day: 'numeric',
-            month: 'numeric',
-            year: 'numeric'
-        }
 
-        var dateString = date.toLocaleDateString(forecast.city.country, optionsSt).split(', ');
+        var dateString = date.toLocaleDateString("London", optionsSt).split(', ');
 
         this.daysWeather[dayNum].date =  {
             day: dateString[0],

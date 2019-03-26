@@ -1,6 +1,7 @@
 import Search from './modules/Search'
 import Location from './modules/CurretnLocation'
 import Weather from './modules/Weather'
+import googleMap from './modules/googleMap'
 import * as todaysWeather from './view/todaysWeatherView';
 import * as nextDaysWeatherView from './view/nextDaysWeatherView';
 import {
@@ -14,6 +15,7 @@ import {
     updateWikiRes
 } from './view/showWikiContent';
 
+
 const state = {};
 
 const controlSearch = async (query) => {
@@ -24,13 +26,14 @@ const controlSearch = async (query) => {
     }
     loader();
     if (query) {
+
         // 2. new search object and add to state
         state.search = new Search(query);
 
         // 3. preapere UI for results
         clearInput();
 
-        // 4. search     
+        // 4. search
         await state.search.getResults();
 
         if (state.search.weatherResult) {
@@ -44,15 +47,18 @@ const controlSearch = async (query) => {
         }
 
     }
+
+
+    controlMap(state.search.weatherResult.city.coord);
     clearLoader();
- 
+
 }
 
 const controlWeather = (forecast) => {
 
-    state.weather = new Weather();  
+    state.weather = new Weather();
     state.weather.setWeather(forecast);
-    for (var i = 0; i < 5; i++){ 
+    for (var i = 0; i < 5; i++){
         state.weather.generateDate(forecast, i);
         let date = state.weather.daysWeather[i].date;
         state.weather.calculateTempMax(forecast.list, date, i);
@@ -60,8 +66,25 @@ const controlWeather = (forecast) => {
         state.weather.generateIcon(forecast, i);
         state.weather.rain(forecast, i);
         state.weather.calcWind(forecast, i);
-    }  
-    
+    }
+
+};
+
+const controlMap = (latLng) => {
+  var myLatLng = {
+    lat: latLng.lat,
+    lng: latLng.lon
+  };
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 15,
+    center: myLatLng
+  });
+
+  var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+  });
 };
 
 

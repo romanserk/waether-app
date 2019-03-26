@@ -1,6 +1,7 @@
 export const elements = {
     searchBtn: document.querySelector('.find'),
-    searchInput: document.querySelector('.search__field'),
+    searchInputCity: document.querySelector('.search__field-city'),
+    searchInputCountry: document.querySelector('.search__field-country'),
     todayWeather: document.querySelector('.today'),
     nextDaysWeather: document.querySelectorAll('.days'),
     wikiContainer: document.querySelector('.wiki'),
@@ -23,6 +24,6 @@ export const clearLoader = () => {
 }
 
 
-export const getInput = () => elements.searchInput.value;
+export const getInput = () => elements.searchInputCity.value;
 
-export const clearInput = () => elements.searchInput.value = '';
+export const clearInput = () => elements.searchInputCity.value = '';

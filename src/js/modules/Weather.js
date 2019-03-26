@@ -61,7 +61,11 @@ export default class Weather {
                 tempMax = item.main.temp_max;
             }
         });
-        this.daysWeather[dayNum].tempMax = Math.round(tempMax);
+        if (tempMax > -90){
+          this.daysWeather[dayNum].tempMax = Math.round(tempMax);
+        }else{
+          this.daysWeather[dayNum].tempMax = Math.round(weather[0].main.temp_max);
+        }
     };
 
     calculateTempMin(weather, date, dayNum){
@@ -72,7 +76,11 @@ export default class Weather {
                 tempMin = item.main.temp_min;
             }
         });
-        this.daysWeather[dayNum].tempMin = Math.round(tempMin);
+        if (tempMin < 99){
+          this.daysWeather[dayNum].tempMin = Math.round(tempMin);
+        } else{
+          this.daysWeather[dayNum].tempMin = Math.round(weather[0].main.temp_min);
+        }
     };
 
     generateIcon(forecast, index) {

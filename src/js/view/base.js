@@ -5,6 +5,7 @@ export const elements = {
     todayWeather: document.querySelector('.today'),
     nextDaysWeather: document.querySelectorAll('.days'),
     wikiContainer: document.querySelector('.wiki'),
+    mapElement: document.getElementById('map'),
 };
 
 

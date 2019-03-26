@@ -12,6 +12,9 @@ import {
     clearInput
 } from './view/base';
 import {
+    showMap
+} from './view/showMap';
+import {
     updateWikiRes
 } from './view/showWikiContent';
 
@@ -70,21 +73,11 @@ const controlWeather = (forecast) => {
 
 };
 
+
 const controlMap = (latLng) => {
-  var myLatLng = {
-    lat: latLng.lat,
-    lng: latLng.lon
-  };
 
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 15,
-    center: myLatLng
-  });
-
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-  });
+  showMap(latLng);
+  
 };
 
 

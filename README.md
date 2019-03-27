@@ -11,3 +11,6 @@ Repository install guide
     
     
 The forecast information received AJAX call to web API from [https://openweathermap.org](https://openweathermap.org).
+Summery and picture recived by AJAX call to web API from Wikipedia.
+Map and location by google maps API.
+

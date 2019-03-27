@@ -14,3 +14,5 @@ The forecast information received AJAX call to web API from [https://openweather
 Summery and picture recived by AJAX call to web API from Wikipedia.
 Map and location by google maps API.
 
+![alt text](http://url/to/img.png)
+

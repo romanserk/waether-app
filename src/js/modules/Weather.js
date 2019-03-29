@@ -25,13 +25,13 @@ export default class Weather {
         var mm = date.getMonth() + 1; //January is 0!
         var yyyy = date.getFullYear();
         if (dd < 10) {
-          dd = '0' + dd;
+            dd = '0' + dd;
         }
         if (mm < 10) {
-          mm = '0' + mm;
+            mm = '0' + mm;
         }
-        var dateNumb1 =  yyyy + '-' + mm + '-' + dd;
-        var dateNumb2 =  yyyy + '-' + dd + '-' + mm;
+        var dateNumb1 = yyyy + '-' + mm + '-' + dd;
+        var dateNumb2 = yyyy + '-' + dd + '-' + mm;
 
         var optionsSt = {
             weekday: 'long',
@@ -41,7 +41,7 @@ export default class Weather {
 
         var dateString = date.toLocaleDateString("London", optionsSt).split(', ');
 
-        this.daysWeather[dayNum].date =  {
+        this.daysWeather[dayNum].date = {
             day: dateString[0],
             month: dateString[1],
             dateNumb1,
@@ -52,39 +52,39 @@ export default class Weather {
 
     };
 
-    calculateTempMax(weather, date, dayNum){
+    calculateTempMax(weather, date, dayNum) {
         var tempMax = -99;
 
-        weather.forEach(function (item) {
+        weather.forEach(function(item) {
             let currDate = item.dt_txt.split(' ')[0];
             if ((currDate === date.dateNumb1 || currDate === date.dateNumb2) && item.main.temp_max > tempMax) {
                 tempMax = item.main.temp_max;
             }
         });
-        if (tempMax > -90){
-          this.daysWeather[dayNum].tempMax = Math.round(tempMax);
-        }else{
-          this.daysWeather[dayNum].tempMax = Math.round(weather[0].main.temp_max);
+        if (tempMax > -90) {
+            this.daysWeather[dayNum].tempMax = Math.round(tempMax);
+        } else {
+            this.daysWeather[dayNum].tempMax = Math.round(weather[0].main.temp_max);
         }
     };
 
-    calculateTempMin(weather, date, dayNum){
+    calculateTempMin(weather, date, dayNum) {
         var tempMin = 99;
-        weather.forEach(function (item) {
+        weather.forEach(function(item) {
             let currDate = item.dt_txt.split(' ')[0];
             if ((currDate === date.dateNumb1 || currDate === date.dateNumb2) && item.main.temp_max < tempMin) {
                 tempMin = item.main.temp_min;
             }
         });
-        if (tempMin < 99){
-          this.daysWeather[dayNum].tempMin = Math.round(tempMin);
-        } else{
-          this.daysWeather[dayNum].tempMin = Math.round(weather[0].main.temp_min);
+        if (tempMin < 99) {
+            this.daysWeather[dayNum].tempMin = Math.round(tempMin);
+        } else {
+            this.daysWeather[dayNum].tempMin = Math.round(weather[0].main.temp_min);
         }
     };
 
     generateIcon(forecast, index) {
-        this.daysWeather[index].icon =  forecast.list[index].weather[0].icon.split(forecast.list[index].weather[0].icon.includes('n') ? 'n' : 'd')[0];
+        this.daysWeather[index].icon = forecast.list[index].weather[0].icon.split(forecast.list[index].weather[0].icon.includes('n') ? 'n' : 'd')[0];
     };
 
     rain(forecast, index) {
@@ -101,7 +101,7 @@ export default class Weather {
                 hours++;
             }
         }
-        this.daysWeather[index].rain =  Math.round(rainmm / (hours === 0 ? 1 : hours));
+        this.daysWeather[index].rain = Math.round(rainmm / (hours === 0 ? 1 : hours));
     };
 
     calcWind(forecast, index) {

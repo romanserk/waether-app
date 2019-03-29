@@ -1,73 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
 
-		<title>Forecast</title>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
 
-		<!-- Loading third party fonts -->
-		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
-		<link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<title>Forecast</title>
 
-		<!-- Loading main css file -->
-		<link rel="stylesheet" href="style.css">
+	<!-- Loading third party fonts -->
+	<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
+	<link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-	</head>
+	<!-- Loading main css file -->
 
-
-	<body>
+</head>
 
 
-		<div class="site-content">
+<body>
 
 
-			<div class="hero" data-bg-image="images/banner.png">
-				<div class="container">
-					<form action="#" class="find-location">
-						<input class="search__field-city" type="text" placeholder="City name">
-						<input class="search__field-country" type="text" placeholder="Country code">
-						<input class="find" type="submit" value="Find">
-					</form>
+	<div class="site-content">
 
-				</div>
+
+		<div class="hero">
+			<div class="container">
+				<form action="#" class="find-location">
+					<input class="search__field-city" type="text" placeholder="City name">
+					<input class="search__field-country" type="text" placeholder="Country code">
+					<input class="find" type="submit" value="Find">
+				</form>
 			</div>
-			<div class="forecast-table">
-				<div class="forecast-holder container">
-					<div class="forecast-container">
-						<div class="today forecast">
-
-						</div>
-						<div class="days forecast">
-
-						</div>
-						<div class="days forecast">
-
-						</div>
-						<div class="days forecast">
-
-						</div>
-						<div class="days forecast">
-
-						</div>
-
-					</div>
-				</div>
-				<div class="wiki container">
-
-				</div>
-			</div>
-			<div class="container" id="map"></div>
 
 		</div>
 
+		<div class="forecast-table">
+			<div class="forecast-holder container">
+				<div class="forecast-container">
+					<div class="today forecast">
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2NxQzgP8XBvSoWThbUzNYuanEN2I6MAM"
-		async defer></script>
+					</div>
+					<div class="days forecast">
+
+					</div>
+					<div class="days forecast">
+
+					</div>
+					<div class="days forecast">
+
+					</div>
+					<div class="days forecast">
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="wiki container">
+
+			</div>
+		</div>
+		<div class="container" id="map"></div>
+
+	</div>
 
 
-	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2NxQzgP8XBvSoWThbUzNYuanEN2I6MAM" async defer></script>
+
+
+</body>
 
 </html>

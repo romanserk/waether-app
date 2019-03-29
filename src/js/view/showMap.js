@@ -5,98 +5,142 @@ import {
 export const showMap = (latLng) => {
 
     var myLatLng = {
-      lat: latLng.lat,
-      lng: latLng.lon
+        lat: latLng.lat,
+        lng: latLng.lon
     };
 
     var map = new google.maps.Map(elements.mapElement, {
-      zoom: 12,
-      center: myLatLng,
-      styles: [
-            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
-            {
-              featureType: 'administrative.locality',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#d59563'}]
+        zoom: 12,
+        center: myLatLng,
+        styles: [{
+                elementType: 'geometry',
+                stylers: [{
+                    color: '#242f3e'
+                }]
             },
             {
-              featureType: 'poi',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#d59563'}]
+                elementType: 'labels.text.stroke',
+                stylers: [{
+                    color: '#242f3e'
+                }]
             },
             {
-              featureType: 'poi.park',
-              elementType: 'geometry',
-              stylers: [{color: '#263c3f'}]
+                elementType: 'labels.text.fill',
+                stylers: [{
+                    color: '#746855'
+                }]
             },
             {
-              featureType: 'poi.park',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#6b9a76'}]
+                featureType: 'administrative.locality',
+                elementType: 'labels.text.fill',
+                stylers: [{
+                    color: '#d59563'
+                }]
             },
             {
-              featureType: 'road',
-              elementType: 'geometry',
-              stylers: [{color: '#38414e'}]
+                featureType: 'poi',
+                elementType: 'labels.text.fill',
+                stylers: [{
+                    color: '#d59563'
+                }]
             },
             {
-              featureType: 'road',
-              elementType: 'geometry.stroke',
-              stylers: [{color: '#212a37'}]
+                featureType: 'poi.park',
+                elementType: 'geometry',
+                stylers: [{
+                    color: '#263c3f'
+                }]
             },
             {
-              featureType: 'road',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#9ca5b3'}]
+                featureType: 'poi.park',
+                elementType: 'labels.text.fill',
+                stylers: [{
+                    color: '#6b9a76'
+                }]
             },
             {
-              featureType: 'road.highway',
-              elementType: 'geometry',
-              stylers: [{color: '#746855'}]
+                featureType: 'road',
+                elementType: 'geometry',
+                stylers: [{
+                    color: '#38414e'
+                }]
             },
             {
-              featureType: 'road.highway',
-              elementType: 'geometry.stroke',
-              stylers: [{color: '#1f2835'}]
+                featureType: 'road',
+                elementType: 'geometry.stroke',
+                stylers: [{
+                    color: '#212a37'
+                }]
             },
             {
-              featureType: 'road.highway',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#f3d19c'}]
+                featureType: 'road',
+                elementType: 'labels.text.fill',
+                stylers: [{
+                    color: '#9ca5b3'
+                }]
             },
             {
-              featureType: 'transit',
-              elementType: 'geometry',
-              stylers: [{color: '#1e202b'}]
+                featureType: 'road.highway',
+                elementType: 'geometry',
+                stylers: [{
+                    color: '#746855'
+                }]
             },
             {
-              featureType: 'transit.station',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#d59563'}]
+                featureType: 'road.highway',
+                elementType: 'geometry.stroke',
+                stylers: [{
+                    color: '#1f2835'
+                }]
             },
             {
-              featureType: 'water',
-              elementType: 'geometry',
-              stylers: [{color: '#1e202b'}]
+                featureType: 'road.highway',
+                elementType: 'labels.text.fill',
+                stylers: [{
+                    color: '#f3d19c'
+                }]
             },
             {
-              featureType: 'water',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#515c6d'}]
+                featureType: 'transit',
+                elementType: 'geometry',
+                stylers: [{
+                    color: '#1e202b'
+                }]
             },
             {
-              featureType: 'water',
-              elementType: 'labels.text.stroke',
-              stylers: [{color: '#1e202b'}]
+                featureType: 'transit.station',
+                elementType: 'labels.text.fill',
+                stylers: [{
+                    color: '#d59563'
+                }]
+            },
+            {
+                featureType: 'water',
+                elementType: 'geometry',
+                stylers: [{
+                    color: '#1e202b'
+                }]
+            },
+            {
+                featureType: 'water',
+                elementType: 'labels.text.fill',
+                stylers: [{
+                    color: '#515c6d'
+                }]
+            },
+            {
+                featureType: 'water',
+                elementType: 'labels.text.stroke',
+                stylers: [{
+                    color: '#1e202b'
+                }]
             }
-          ],
+        ],
     });
 
     var marker = new google.maps.Marker({
-      position: myLatLng,
-      map: map,
+        position: myLatLng,
+        map: map,
     });
 
 }

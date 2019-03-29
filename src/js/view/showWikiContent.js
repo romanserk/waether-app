@@ -4,10 +4,10 @@ import {
 
 
 export const updateWikiRes = content => {
-
-    elements.wikiContainer.innerHTML = `
-    <p>${content.data.extract}</p>
-    <img src=${content.data.originalimage.source}>
-    `;
     
+    elements.wikiContainer.innerHTML = `
+        <p>${content.data.extract}</p>
+        <img src=${content.data.originalimage.source}>
+    `;
+
 }

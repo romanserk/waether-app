@@ -8,7 +8,7 @@ export default class Search {
 
     async getResults() {
         // recive API without domain
-        const proxy = 'https://cors-anywhere.herokuapp.com/'
+        const proxy = 'https://cors-anywhere.herokuapp.com/';
         // the API key from www.food2fork.com
         const key = 'ec4a7d7f52eccdce20c3d822e10336c1';
         try {
@@ -26,6 +26,7 @@ export default class Search {
         } catch (error) {
             alert(error);
         }
+
 
     };
 

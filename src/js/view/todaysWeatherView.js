@@ -17,7 +17,7 @@
                 <div class="num">${todayWeather.tempMax}<sup>o</sup>C</div>
                 <div class="today-icon forecast-icon">
                     <img src="images/icons/icon-${todayWeather.icon}.svg" alt="" width=90>
-                </div>	
+                </div>
             </div>
             <span><img src="images/icon-umberella.png" alt="">${todayWeather.rain}mm</span>
             <span><img src="images/icon-wind.png" alt="">${todayWeather.wind.speed}km/h</span>

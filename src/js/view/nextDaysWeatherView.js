@@ -4,7 +4,7 @@ import {
 
 
 export const showNextDaysWeather = forecast => {
-    elements.nextDaysWeather.forEach(function(element, index) {     
+    elements.nextDaysWeather.forEach(function(element, index) {
         element.innerHTML = `
             <div class="forecast-header">
                 <div class="day">${forecast[index].date.day}</div>
@@ -19,5 +19,3 @@ export const showNextDaysWeather = forecast => {
         `;
     });
 }
-
-

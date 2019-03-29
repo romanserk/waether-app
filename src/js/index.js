@@ -1,7 +1,6 @@
 import Search from './modules/Search'
 import Location from './modules/CurretnLocation'
 import Weather from './modules/Weather'
-import googleMap from './modules/googleMap'
 import * as todaysWeather from './view/todaysWeatherView';
 import * as nextDaysWeatherView from './view/nextDaysWeatherView';
 import {
@@ -17,6 +16,11 @@ import {
 import {
     updateWikiRes
 } from './view/showWikiContent';
+import {
+    showLocalTime
+} from './view/showLocalTimeDate';
+
+
 
 
 const state = {};
@@ -43,16 +47,18 @@ const controlSearch = async (query) => {
             // 5. render results
             controlWeather(state.search.weatherResult);
             updateWikiRes(state.search.wikiResult);
+
             // add results to UI
             todaysWeather.showTodaysWeather(state.weather.daysWeather[0]);
-            state.weather.daysWeather.splice(0,1);
+            state.weather.daysWeather.splice(0, 1);
             nextDaysWeatherView.showNextDaysWeather(state.weather.daysWeather);
         }
 
     }
 
-
     controlMap(state.search.weatherResult.city.coord);
+
+
     clearLoader();
 
 }
@@ -61,7 +67,7 @@ const controlWeather = (forecast) => {
 
     state.weather = new Weather();
     state.weather.setWeather(forecast);
-    for (var i = 0; i < 5; i++){
+    for (var i = 0; i < 5; i++) {
         state.weather.generateDate(forecast, i);
         let date = state.weather.daysWeather[i].date;
         state.weather.calculateTempMax(forecast.list, date, i);
@@ -75,10 +81,10 @@ const controlWeather = (forecast) => {
 
 
 const controlMap = (latLng) => {
-
-  showMap(latLng);
-  
+    showMap(latLng);
 };
+
+
 
 
 elements.searchBtn.addEventListener('click', e => {
@@ -86,7 +92,7 @@ elements.searchBtn.addEventListener('click', e => {
     controlSearch();
 });
 
-window.addEventListener('load', async () =>{
+window.addEventListener('load', async () => {
     state.city = new Location();
     await state.city.getResults();
     controlSearch(state.city.cityName);

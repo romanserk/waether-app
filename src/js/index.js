@@ -66,24 +66,24 @@ const controlSearch = async (query) => {
 const controlWeather = (forecast) => {
 
     state.weather = new Weather();
-    state.weather.setWeather(forecast);
+    state.weather.setWeather(forecast.city.name);
     for (var i = 0; i < 5; i++) {
-        state.weather.generateDate(forecast, i);
+        state.weather.generateDate(forecast.city.name, i);
         let date = state.weather.daysWeather[i].date;
         state.weather.calculateTempMax(forecast.list, date, i);
         state.weather.calculateTempMin(forecast.list, date, i);
-        state.weather.generateIcon(forecast, i);
-        state.weather.rain(forecast, i);
+        state.weather.generateIcon(forecast.list[i], i);
+        state.weather.rain(forecast.list, i);
         state.weather.calcWind(forecast, i);
     }
 
 };
 
 
+
 const controlMap = (latLng) => {
     showMap(latLng);
 };
-
 
 
 

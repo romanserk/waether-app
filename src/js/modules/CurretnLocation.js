@@ -7,14 +7,16 @@ export default class Location {
     async getResults() {
 
         try {
-            const res = await axios(`http://ip-api.com/json`);
+            const res = await axios(`https://ipapi.co/json/`);
 
-            this.cityName = res.data.city + ',' + res.data.countryCode.toLowerCase();
-            this.countryCode = res.data.countryCode.toLowerCase();
+            console.log(res);
+            this.cityName = res.data.city + ',' + res.data.country.toLowerCase();
+            this.countryCode = res.data.country.toLowerCase();
 
         } catch (error) {
 
             alert(error);
+
         }
 
     }

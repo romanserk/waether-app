@@ -1,11 +1,12 @@
 export default class Weather {
+
+
     constructor() {
         this.daysWeather = [];
     }
 
-    setWeather(weather) {
 
-        var city = weather.city.name;
+    setWeather(city) {
 
         for (var i = 0; i < 5; i++) {
             var singleDay = {
@@ -13,16 +14,16 @@ export default class Weather {
             }
             this.daysWeather.push(singleDay);
         }
+        
     };
 
-    generateDate(forecast, dayNum) {
-        // var date = new Date();
-        // date.setDate(date.getDate() + dayNum);
+
+    generateDate(city, dayNum) {
 
         var date = new Date();
         date.setDate(date.getDate() + dayNum);
         var dd = date.getDate();
-        var mm = date.getMonth() + 1; //January is 0!
+        var mm = date.getMonth() + 1; //January is 0
         var yyyy = date.getFullYear();
         if (dd < 10) {
             dd = '0' + dd;
@@ -47,10 +48,11 @@ export default class Weather {
             dateNumb1,
             dateNumb2
         }
-        this.daysWeather[dayNum].city = forecast.city.name;
+        this.daysWeather[dayNum].city = city;
 
 
     };
+
 
     calculateTempMax(weather, date, dayNum) {
         var tempMax = -99;
@@ -68,6 +70,7 @@ export default class Weather {
         }
     };
 
+
     calculateTempMin(weather, date, dayNum) {
         var tempMin = 99;
         weather.forEach(function(item) {
@@ -83,26 +86,29 @@ export default class Weather {
         }
     };
 
+
     generateIcon(forecast, index) {
-        this.daysWeather[index].icon = forecast.list[index].weather[0].icon.split(forecast.list[index].weather[0].icon.includes('n') ? 'n' : 'd')[0];
+        this.daysWeather[index].icon = forecast.weather[0].icon.split(forecast.weather[0].icon.includes('n') ? 'n' : 'd')[0];
     };
 
-    rain(forecast, index) {
+
+    rain(forecastDays, index) {
 
         let rainmm = 0;
         let hours = 0;
         for (let i = index; i < index + 8; i++) {
 
-            if (forecast.list[i].rain && forecast.list[i].rain['3h']) {
-                rainmm += forecast.list[i].rain['3h'];
+            if (forecastDays[i].rain && forecastDays[i].rain['3h']) {
+                rainmm += forecastDays[i].rain['3h'];
                 hours++;
-            } else if (forecast.list[i].snow && forecast.list[i].snow['3h']) {
-                rainmm += forecast.list[i].snow['3h'];
+            } else if (forecastDays[i].snow && forecastDays[i].snow['3h']) {
+                rainmm += forecastDays[i].snow['3h'];
                 hours++;
             }
         }
         this.daysWeather[index].rain = Math.round(rainmm / (hours === 0 ? 1 : hours));
     };
+
 
     calcWind(forecast, index) {
         var windSpeed = 0;

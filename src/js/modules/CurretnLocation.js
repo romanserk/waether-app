@@ -9,7 +9,6 @@ export default class Location {
         try {
             const res = await axios(`https://ipapi.co/json/`);
 
-            console.log(res);
             this.cityName = res.data.city + ',' + res.data.country.toLowerCase();
             this.countryCode = res.data.country.toLowerCase();
 

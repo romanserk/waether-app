@@ -50,8 +50,8 @@ const controlSearch = async (query) => {
 
             // add results to UI
             todaysWeather.showTodaysWeather(state.weather.daysWeather[0]);
-            state.weather.daysWeather.splice(0, 1);
             nextDaysWeatherView.showNextDaysWeather(state.weather.daysWeather);
+            
         }
 
     }
@@ -66,16 +66,14 @@ const controlSearch = async (query) => {
 const controlWeather = (forecast) => {
 
     state.weather = new Weather();
-    state.weather.setWeather(forecast.city.name);
-    for (var i = 0; i < 5; i++) {
-        state.weather.generateDate(forecast.city.name, i);
-        let date = state.weather.daysWeather[i].date;
-        state.weather.calculateTempMax(forecast.list, date, i);
-        state.weather.calculateTempMin(forecast.list, date, i);
-        state.weather.generateIcon(forecast.list[i], i);
-        state.weather.rain(forecast.list, i);
-        state.weather.calcWind(forecast, i);
-    }
+    state.weather.setWeather(forecast);
+    state.weather.generateDate();
+    state.weather.parseList();
+    state.weather.calculateTempMaxMin();
+    state.weather.generateIcon();
+    state.weather.rain();
+    state.weather.calcWind();
+
 
 };
 

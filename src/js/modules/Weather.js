@@ -93,16 +93,14 @@ export default class Weather {
 
         var tempMax, tempMin;
 
-        tempMax = index === 0 ? today.dailyWeather[0].main.temp_max : today.tempMax;
+        tempMax = index === 0 ? listItem.main.temp_max : today.tempMax;
         tempMax = listItem.main.temp_max > tempMax ? listItem.main.temp_max : tempMax;
 
-        tempMin = index === 0 ? today.dailyWeather[0].main.temp_min : today.tempMin;
+        tempMin = index === 0 ? listItem.main.temp_min : today.tempMin;
         tempMin = listItem.main.temp_min < tempMin ? listItem.main.temp_min : tempMin;
 
         today.tempMax = Math.round(tempMax);
         today.tempMin = Math.round(tempMin);
-
-
 
     };
 
@@ -114,7 +112,12 @@ export default class Weather {
 
     rain(today, listItem, listIndex) {
 
-        listIndex === 0 ? (today.rain = 0, today.rainHours = 0) : today.rain;
+        if (listIndex === 0) {
+
+            today.rain = 0;
+            today.rainHours = 0;
+
+        }
 
         if (listItem.rain && listItem.rain['3h']) {
 
@@ -122,34 +125,43 @@ export default class Weather {
             today.rainHours++;
 
         } else if (listItem.snow && listItem.snow['3h']) {
+
             today.rain += listItem.snow['3h'];
             today.rainHours++;
+
         }
-        if (listIndex === today.dailyWeather.length - 1) {
-            today.rain = Math.round(today.rain / (today.rainHours === 0 ? 1 : today.rainHours));
+        if ((listIndex === today.dailyWeather.length - 1) && today.rainHours > 0) {
+
+            today.rain = Math.round(today.rain / today.rainHours);
+
         }
 
     };
 
     calcWind(today, listItem, listIndex) {
 
-        var dirArr = ['North', 'East', 'South', 'West'];
+        var dirArr = ['North', 'East', 'South', 'West', 'North'];
 
         if (listIndex === 0) {
-            today.windSpeed = 0;
-            today.windDirection = dirArr[Math.round(today.dailyWeather[0].wind.deg / 90)];
-        } else if (listIndex === today.dailyWeather.length - 1) {
+
             today.wind = {
-                speed: Math.round(today.windSpeed / today.dailyWeather.length),
-                dir: today.windDirection ? today.windDirection : dirArr[3]
+                speed: listItem.wind.speed,
+                dir: listItem.wind.deg
             }
-            today.windSpeed = null;
-            today.windDirection = null;
+
         } else {
-            today.windSpeed += listItem.wind.speed;
+
+            today.wind.speed += listItem.wind.speed;
+            today.wind.dir += listItem.wind.deg;
+
         }
 
+        if ((listIndex === today.dailyWeather.length - 1) && listIndex > 0) {
 
+            today.wind.speed = Math.round(today.wind.speed / listIndex);
+            today.wind.dir = dirArr[Math.round((today.wind.dir / listIndex) / 90)];
+
+        }
 
     };
 

@@ -1,4 +1,7 @@
 import axios from 'axios';
+import {
+    clearLoader
+} from '../view/base';
 
 export default class Search {
 
@@ -16,6 +19,7 @@ export default class Search {
             this.weatherResult = resWeather.data;
         } catch (error) {
             alert(error + ` Cant find such location as ${this.query}`);
+            clearLoader();
         }
         try {
             this.query = this.query.replace(' ', '%20');
@@ -25,6 +29,7 @@ export default class Search {
 
         } catch (error) {
             alert(error);
+            clearLoader();
         }
 
 

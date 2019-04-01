@@ -135,12 +135,12 @@ form input[type="reset"] {
 .hero {
   display: block;
   box-sizing: border-box;
-  padding: 70px 0; }
+  padding: 70px 0px 10px 0px; }
 
 .find-location {
   position: relative;
   display: flex;
-  margin-bottom: 70px; }
+  margin-bottom: 50px; }
 
 .search__field-city {
   margin-right: 10px; }

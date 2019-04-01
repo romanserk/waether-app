@@ -14,7 +14,6 @@ export default class Search {
         try {
             const resWeather = await axios(`${proxy}https://api.openweathermap.org/data/2.5/forecast?q=${this.query}&units=metric&appid=${key}`);
             this.weatherResult = resWeather.data;
-            console.log(resWeather.data);
         } catch (error) {
             alert(error + ` Cant find such location as ${this.query}`);
         }

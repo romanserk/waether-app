@@ -27,62 +27,47 @@ const state = {};
 
 const controlSearch = async (query) => {
 
-    // 1. get query from view
+    // get query from view
     if (!query) {
         query = getInput();
     }
     loader();
     if (query) {
 
-        // 2. new search object and add to state
+        // new search object and add to state
         state.search = new Search(query);
 
-        // 3. preapere UI for results
+        // preapere UI for results
         clearInput();
 
-        // 4. search
+        // search
         await state.search.getResults();
 
         if (state.search.weatherResult) {
-            // 5. render results
-            controlWeather(state.search.weatherResult);
+
+            // render results
             updateWikiRes(state.search.wikiResult);
+            state.weather = new Weather();
+            state.weather.setWeather(state.search.weatherResult);
 
             // add results to UI
             todaysWeather.showTodaysWeather(state.weather.daysWeather[0]);
             nextDaysWeatherView.showNextDaysWeather(state.weather.daysWeather);
-            
+
         }
 
     }
 
     controlMap(state.search.weatherResult.city.coord);
 
-
     clearLoader();
 
 }
-
-const controlWeather = (forecast) => {
-
-    state.weather = new Weather();
-    state.weather.setWeather(forecast);
-    state.weather.generateDate();
-    state.weather.parseList();
-    state.weather.calculateTempMaxMin();
-    state.weather.generateIcon();
-    state.weather.rain();
-    state.weather.calcWind();
-
-
-};
-
 
 
 const controlMap = (latLng) => {
     showMap(latLng);
 };
-
 
 
 elements.searchBtn.addEventListener('click', e => {

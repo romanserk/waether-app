@@ -112,7 +112,6 @@ export default class Weather {
         today.icon = currIcon.split(currIcon.includes('n') ? 'n' : 'd')[0]
     };
 
-
     rain(today, listItem, listIndex) {
 
         listIndex === 0 ? (today.rain = 0, today.rainHours = 0) : today.rain;
@@ -132,7 +131,6 @@ export default class Weather {
 
     };
 
-
     calcWind(today, listItem, listIndex) {
 
         var dirArr = ['North', 'East', 'South', 'West'];
@@ -140,16 +138,18 @@ export default class Weather {
         if (listIndex === 0) {
             today.windSpeed = 0;
             today.windDirection = dirArr[Math.round(today.dailyWeather[0].wind.deg / 90)];
-        }
-
-        if (listIndex === today.dailyWeather.length - 1) {
+        } else if (listIndex === today.dailyWeather.length - 1) {
             today.wind = {
                 speed: Math.round(today.windSpeed / today.dailyWeather.length),
                 dir: today.windDirection ? today.windDirection : dirArr[3]
             }
             today.windSpeed = null;
             today.windDirection = null;
+        } else {
+            today.windSpeed += listItem.wind.speed;
         }
+
+
 
     };
 
